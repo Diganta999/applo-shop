@@ -1,4 +1,7 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
 import { formatPrice } from "@/lib/format";
 import { resolveProductImage } from "@/lib/images";
 import { useCart } from "@/lib/cart-context";
@@ -22,14 +25,12 @@ export function ProductCard({ product, delayMs = 0 }: Props) {
   return (
     <article className="group relative animate-fade-up" style={{ animationDelay: `${delayMs}ms` }}>
       <Link
-        to="/products/$id"
-        params={{ id: product.id }}
+        href={`/products/${product.id}`}
         className="block w-full aspect-[4/5] bg-mocha/30 rounded-3xl border border-foreground/5 overflow-hidden transition-transform duration-700 group-hover:scale-[1.02]"
       >
-        <img
+        <Image
           src={img}
           alt={product.name}
-          loading="lazy"
           width={800}
           height={1000}
           className="w-full h-full object-cover"
@@ -37,7 +38,7 @@ export function ProductCard({ product, delayMs = 0 }: Props) {
       </Link>
       <div className="mt-5 flex justify-between items-center glass-bright p-5 rounded-2xl gap-3">
         <div className="min-w-0">
-          <Link to="/products/$id" params={{ id: product.id }}>
+          <Link href={`/products/${product.id}`}>
             <h3 className="font-extrabold text-lg tracking-tight truncate">{product.name}</h3>
           </Link>
           <p className="text-black/60 text-sm font-mono">{formatPrice(product.price_cents)}</p>

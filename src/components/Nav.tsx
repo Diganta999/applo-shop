@@ -1,28 +1,36 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { useCart } from "@/lib/cart-context";
 
 export function Nav() {
   const { user, isAdmin, signOut } = useAuth();
   const { count } = useCart();
+  const pathname = usePathname();
+
+  const getLinkClass = (href: string) => {
+    return pathname === href ? "text-foreground" : "";
+  };
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-50 px-4 sm:px-6 py-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between glass-panel rounded-2xl px-5 sm:px-6 py-3">
-        <Link to="/" className="text-xl font-extrabold tracking-tighter uppercase text-foreground">
-          Vitreous
+    <nav className="fixed top-0 left-0 right-0 mx-auto w-[80%] z-50 px-4 sm:px-6 py-4">
+      <div className="w-full flex items-center justify-between glass-panel rounded-2xl px-5 sm:px-6 py-3">
+        <Link href="/" className="text-xl font-extrabold tracking-tighter uppercase text-foreground">
+          Applo
         </Link>
         <div className="hidden md:flex gap-8 text-sm font-medium text-foreground/80">
-          <Link to="/products" activeProps={{ className: "text-foreground" }}>
-            Vessels
+          <Link href="/products" className={getLinkClass("/products")}>
+            Products
           </Link>
           {user && (
-            <Link to="/orders" activeProps={{ className: "text-foreground" }}>
+            <Link href="/orders" className={getLinkClass("/orders")}>
               Orders
             </Link>
           )}
           {isAdmin && (
-            <Link to="/admin" activeProps={{ className: "text-foreground" }}>
+            <Link href="/admin" className={getLinkClass("/admin")}>
               Admin
             </Link>
           )}
@@ -37,14 +45,14 @@ export function Nav() {
             </button>
           ) : (
             <Link
-              to="/login"
+              href="/login"
               className="text-xs font-mono uppercase tracking-widest text-foreground/60 hover:text-foreground min-h-[44px] flex items-center px-2"
             >
               Sign in
             </Link>
           )}
           <Link
-            to="/cart"
+            href="/cart"
             className="px-3 py-2 min-h-[44px] flex items-center rounded-full border border-foreground/20 text-[10px] font-mono uppercase tracking-widest text-foreground hover:bg-foreground/10 transition-colors"
           >
             Cart ({count})
