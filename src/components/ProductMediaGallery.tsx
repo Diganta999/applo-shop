@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Product3DViewer from "./Product3DViewer";
 import ProductVideo from "./ProductVideo";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   imageSrc: string | any;
@@ -16,14 +17,15 @@ export default function ProductMediaGallery({ imageSrc, modelUrl, videoUrl, alt 
   const [tab, setTab] = useState<"image" | "3d" | "video">("image");
 
   const TabButton = ({ id, label }: { id: string; label: string }) => (
-    <button
+    <Button
+      variant="ghost"
       onClick={() => setTab(id as any)}
-      className={`px-3 py-1 rounded-full text-xs font-mono tracking-wider transition-all duration-200 
-        ${tab === id ? "bg-foreground text-background" : "bg-white/6 text-foreground/70 hover:bg-white/10"}`}
+      className={`px-3 py-1 h-auto rounded-full text-xs font-mono tracking-wider transition-all duration-200 border-none outline-none shadow-none 
+        ${tab === id ? "bg-foreground text-background hover:bg-foreground hover:text-background" : "bg-white/6 text-foreground/70 hover:bg-white/10 hover:text-foreground"}`}
       aria-pressed={tab === id}
     >
       {label}
-    </button>
+    </Button>
   );
 
   return (

@@ -5,6 +5,9 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { useCart } from "@/lib/cart-context";
 import { formatPrice } from "@/lib/format";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 export default function CartPage() {
   const { items, totalCents, setQuantity, remove } = useCart();
@@ -17,14 +20,14 @@ export default function CartPage() {
           <h1 className="text-5xl font-extrabold tracking-tight mb-12 animate-fade-up">Basket</h1>
 
           {items.length === 0 ? (
-            <div className="glass-panel rounded-3xl p-12 text-center">
+            <Card className="glass-panel rounded-3xl p-12 text-center shadow-none border-none">
               <p className="text-foreground/70 mb-6">Your basket is empty.</p>
               <Link href="/products" className="glass-btn inline-flex items-center">
                 Browse vessels
               </Link>
-            </div>
+            </Card>
           ) : (
-            <div className="glass-bright rounded-3xl p-8 space-y-6">
+            <Card className="glass-bright rounded-3xl p-8 space-y-6 shadow-none border-none">
               {items.map((item) => (
                 <div
                   key={item.id}
@@ -36,22 +39,23 @@ export default function CartPage() {
                       {formatPrice(item.priceCents)}
                     </p>
                   </div>
-                  <input
+                  <Input
                     type="number"
                     min={1}
                     value={item.quantity}
                     onChange={(e) => setQuantity(item.id, parseInt(e.target.value) || 1)}
-                    className="w-16 h-11 text-center rounded-lg border-2 border-black/15 bg-white/40 font-bold"
+                    className="w-16 h-11 px-2 text-center rounded-lg border-2 border-black/15 bg-white/40 font-bold focus-visible:outline-none focus-visible:border-black focus-visible:ring-0 shadow-none text-base"
                   />
                   <div className="font-mono w-24 text-right">
                     {formatPrice(item.priceCents * item.quantity)}
                   </div>
-                  <button
+                  <Button
+                    variant="ghost"
                     onClick={() => remove(item.id)}
-                    className="text-xs font-mono uppercase tracking-widest text-black/50 hover:text-black min-h-[44px] px-2"
+                    className="text-xs font-mono bg-transparent uppercase tracking-widest text-black/50 hover:text-black min-h-[44px] px-2 shadow-none"
                   >
                     Remove
-                  </button>
+                  </Button>
                 </div>
               ))}
 
@@ -66,7 +70,7 @@ export default function CartPage() {
               >
                 Checkout
               </Link>
-            </div>
+            </Card>
           )}
         </div>
       </main>

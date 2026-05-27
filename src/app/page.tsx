@@ -7,8 +7,13 @@ import { getProducts } from "@/lib/mock-data";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
-import HeroCarousel from "@/components/HeroCarousel";
 import { ArrowUpRight } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const HeroCarousel = dynamic(() => import("@/components/HeroCarousel"), {
+  ssr: false,
+  loading: () => <div className="w-full h-64 bg-mocha/20 rounded-3xl animate-pulse"></div>
+});
 
 export default function Home() {
   const { data: products = [] } = useQuery({

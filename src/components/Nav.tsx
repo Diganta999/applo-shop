@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { useCart } from "@/lib/cart-context";
+import { Button } from "@/components/ui/button";
 
 export function Nav() {
   const { user, isAdmin, signOut } = useAuth();
@@ -18,7 +19,7 @@ export function Nav() {
     <nav className="fixed top-0 left-0 right-0 mx-auto w-[80%] z-50 px-4 sm:px-6 py-4">
       <div className="w-full flex items-center justify-between glass-panel rounded-2xl px-5 sm:px-6 py-3">
         <Link href="/" className="text-xl font-extrabold tracking-tighter uppercase text-foreground">
-          Applo
+          Elegant
         </Link>
         <div className="hidden md:flex gap-8 text-sm font-medium text-foreground/80">
           <Link href="/products" className={getLinkClass("/products")}>
@@ -37,12 +38,13 @@ export function Nav() {
         </div>
         <div className="flex items-center gap-3">
           {user ? (
-            <button
+            <Button
+              variant="ghost"
               onClick={signOut}
-              className="text-xs font-mono uppercase tracking-widest text-foreground/60 hover:text-foreground min-h-[44px] px-2"
+              className="text-xs font-mono uppercase bg-transparent tracking-widest text-foreground/60 hover:text-foreground hover:bg-transparent min-h-[44px] px-2 shadow-none border-none outline-none"
             >
               Sign out
-            </button>
+            </Button>
           ) : (
             <Link
               href="/login"

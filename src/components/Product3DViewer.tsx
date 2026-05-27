@@ -91,7 +91,7 @@ export default function Product3DViewer({ modelUrl, color = "#b48b63" }: Props) 
     return (
       <div className="animate-fade-up" style={{ animationDelay: "100ms" }}>
         <label className="font-mono text-xs uppercase text-foreground/60 mb-3 block">3D Preview</label>
-        {/* @ts-ignore html */}
+        {/* @ts-expect-error html */}
         <model-viewer
           src={modelUrl}
           alt="3D model"

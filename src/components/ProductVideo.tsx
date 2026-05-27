@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Play } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   videoUrl?: string | null;
@@ -42,13 +43,14 @@ export default function ProductVideo({ videoUrl }: Props) {
       ) : (
         <div className="rounded-2xl overflow-hidden border border-foreground/5 shadow-2xl bg-black/30 flex items-center justify-center px-6 py-12">
           <div className="flex items-center gap-6">
-            <button
+            <Button
+              variant="ghost"
               onClick={() => setShowPlayer(true)}
-              className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-md animate-pulse"
+              className="w-16 h-16 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-md animate-pulse p-0"
               aria-label="Play video placeholder"
             >
-              <Play className="w-6 h-6 text-black" />
-            </button>
+              <Play className="w-6 h-6 text-black" fill="currentColor" />
+            </Button>
             <div>
               <div className="text-lg font-bold">Product Video Coming Soon</div>
               <div className="text-foreground/60 text-sm">Were preparing a short showcase for this piece.</div>

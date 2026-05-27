@@ -6,6 +6,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { formatPrice } from "@/lib/format";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 export default function CheckoutPage() {
   const { items, clear } = useCart();
@@ -25,9 +26,9 @@ export default function CheckoutPage() {
         <div className="max-w-md mx-auto">
           <h1 className="text-3xl font-extrabold tracking-tight mb-8">Checkout</h1>
           <p className="mb-4">Total: {formatPrice(total)}</p>
-          <button onClick={onSubmit} className="glass-btn">
+          <Button onClick={onSubmit} variant="applo-glass" className="glass-btn border-none">
             Place Mock Order
-          </button>
+          </Button>
         </div>
       </main>
       <Footer />

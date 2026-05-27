@@ -8,6 +8,9 @@ import { useAuth } from "@/lib/auth-context";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 const schema = z.object({
   email: z.string().trim().email().max(255),
@@ -50,47 +53,48 @@ function LoginContent() {
     <div className="min-h-screen">
       <Nav />
       <main className="pt-32 pb-20 px-6">
-        <div className="max-w-md mx-auto glass-bright rounded-3xl p-10">
-          <h1 className="text-3xl font-extrabold tracking-tight mb-2">Sign in</h1>
-          <p className="text-black/60 text-sm mb-8">Welcome back to Applo Shop.</p>
+        <Card className="max-w-md mx-auto glass-bright rounded-3xl p-10 border-none shadow-none" style={{ backgroundColor: "rgb(213,213,213)" }}>
+          <h1 className="text-3xl font-extrabold tracking-tight mb-2 text-neutral-900">Sign in</h1>
+          <p className="text-neutral-700 text-sm mb-8">Welcome back to Applo Shop.</p>
           <form onSubmit={onSubmit} className="space-y-5">
             <label className="block">
-              <span className="text-xs font-mono uppercase tracking-widest mb-2 block">Email</span>
-              <input
+              <span className="text-xs font-mono uppercase tracking-widest text-neutral-800 mb-2 block">Email</span>
+              <Input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full h-12 rounded-xl bg-white/60 border-2 border-black/15 px-4 font-medium focus:outline-none focus:border-black"
+                className="w-full h-12 rounded-xl bg-white/90 border-2 border-neutral-300 px-4 font-medium text-neutral-900 placeholder:text-neutral-400 focus-visible:outline-none focus-visible:border-neutral-900 focus-visible:ring-0 shadow-none text-base"
               />
             </label>
             <label className="block">
-              <span className="text-xs font-mono uppercase tracking-widest mb-2 block">
+              <span className="text-xs font-mono uppercase tracking-widest text-neutral-800 mb-2 block">
                 Password
               </span>
-              <input
+              <Input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full h-12 rounded-xl bg-white/60 border-2 border-black/15 px-4 font-medium focus:outline-none focus:border-black"
+                className="w-full h-12 rounded-xl bg-white/90 border-2 border-neutral-300 px-4 font-medium text-neutral-900 placeholder:text-neutral-400 focus-visible:outline-none focus-visible:border-neutral-900 focus-visible:ring-0 shadow-none text-base"
               />
             </label>
-            <button
+            <Button
               type="submit"
               disabled={busy}
-              className="w-full h-[54px] bg-black text-white border-2 border-black rounded-2xl font-extrabold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all disabled:opacity-40"
+              variant="applo-primary"
+              className="w-full h-[54px] rounded-2xl"
             >
               {busy ? "Signing in..." : "Sign in"}
-            </button>
+            </Button>
           </form>
-          <p className="text-sm text-black/60 mt-6 text-center">
+          <p className="text-sm text-neutral-700 mt-6 text-center">
             No account?{" "}
-            <Link href="/signup" className="font-extrabold text-black underline underline-offset-4">
+            <Link href="/signup" className="font-extrabold text-neutral-900 hover:text-black underline underline-offset-4">
               Create one
             </Link>
           </p>
-        </div>
+        </Card>
       </main>
       <Footer />
     </div>

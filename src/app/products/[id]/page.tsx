@@ -8,10 +8,16 @@ import { getProduct } from "@/lib/mock-data";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { resolveProductImage } from "@/lib/images";
-import ProductMediaGallery from "@/components/ProductMediaGallery";
 import { formatPrice } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import dynamic from "next/dynamic";
+
+const ProductMediaGallery = dynamic(() => import("@/components/ProductMediaGallery"), {
+  ssr: false,
+  loading: () => <div className="w-full aspect-[4/5] bg-mocha/40 rounded-4xl animate-pulse"></div>
+});
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -62,15 +68,16 @@ export default function ProductDetailPage() {
                   {product.description}
                 </p>
                 <div className="flex flex-wrap gap-4 items-center">
-                  <button
+                  <Button
                     onClick={() => {
                       add({ id: product.id, name: product.name, priceCents: product.price_cents });
                       toast.success("Added " + product.name + " to cart");
                     }}
-                    className="glass-btn"
+                    variant="applo-glass"
+                    className="glass-btn border-none"
                   >
                     Add to bag
-                  </button>
+                  </Button>
                   <span className="font-mono text-xs uppercase tracking-widest text-foreground/40">
                     {product.stock > 0 ? product.stock + " in stock" : "Sold out"}
                   </span>

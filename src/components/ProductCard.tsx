@@ -6,6 +6,8 @@ import { formatPrice } from "@/lib/format";
 import { resolveProductImage } from "@/lib/images";
 import { useCart } from "@/lib/cart-context";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Card, CardFooter } from "@/components/ui/card";
 
 interface Props {
   product: {
@@ -36,24 +38,24 @@ export function ProductCard({ product, delayMs = 0 }: Props) {
           className="w-full h-full object-cover"
         />
       </Link>
-      <div className="mt-5 flex justify-between items-center glass-bright p-5 rounded-2xl gap-3">
+      <Card className="mt-5 flex justify-between items-center glass-bright p-5 rounded-2xl gap-3 shadow-none border-none">
         <div className="min-w-0">
           <Link href={`/products/${product.id}`}>
-            <h3 className="font-extrabold text-lg tracking-tight truncate">{product.name}</h3>
+            <h3 className="font-extrabold text-lg tracking-tight truncate text-white">{product.name}</h3>
           </Link>
-          <p className="text-black/60 text-sm font-mono">{formatPrice(product.price_cents)}</p>
+          <p className="text-white/60 text-sm font-mono">{formatPrice(product.price_cents)}</p>
         </div>
-        <button
+        <Button
           type="button"
           onClick={() => {
             add({ id: product.id, name: product.name, priceCents: product.price_cents });
             toast.success(`Added ${product.name}`);
           }}
-          className="h-11 px-5 bg-white/30 border-2 border-black/15 rounded-xl font-extrabold text-black text-xs uppercase tracking-tight hover:bg-black hover:text-white transition-colors shrink-0"
+          className="h-11 px-5 bg-white/30 border-2 border-black/15 shadow-none rounded-xl font-extrabold text-black text-xs uppercase tracking-tight hover:bg-black hover:text-white transition-colors shrink-0"
         >
           Add
-        </button>
-      </div>
+        </Button>
+      </Card>
     </article>
   );
 }

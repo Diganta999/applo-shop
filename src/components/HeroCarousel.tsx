@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { carouselImages } from "@/lib/images";
+import { Button } from "@/components/ui/button";
 
 export default function HeroCarousel() {
   const images = carouselImages;
@@ -48,10 +49,11 @@ export default function HeroCarousel() {
 
       <div className="absolute left-1/2 transform -translate-x-1/2 bottom-3 z-30 flex gap-2">
         {images.map((_, i) => (
-          <button
+          <Button
             key={i}
+            variant="ghost"
             onClick={() => setIndex(i)}
-            className={`w-2 h-2 rounded-full ${i === index ? "bg-white" : "bg-white/40"}`}
+            className={`w-2 h-2 p-0 min-w-0 min-h-0 border-none outline-none shadow-none rounded-full hover:bg-transparent ${i === index ? "bg-white" : "bg-white/40"}`}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}
